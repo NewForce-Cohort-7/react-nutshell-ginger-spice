@@ -13,3 +13,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.images {
+  display: flex;
+  justify-content: flex-start;
+}

@@ -4,8 +4,10 @@ import { Tasklist } from "../Tasks/TaskList"
 import { TaskForm } from "../Tasks/TaskForm"
 
 
+import { MessageList } from "../Messages/MessageList"
+import { MessageEdit } from "../Messages/MessageEdit"
+import { MessageForm } from "../Messages/MessageForm"
 import { ImageForm } from "../Images/ImageForm"
-
 import { Images } from "../Images/Image"
 import { ImageEdit } from "../Images/ImageEdit"
 
@@ -13,7 +15,9 @@ import { ImageEdit } from "../Images/ImageEdit"
 export const ApplicationViews = () => {
 	return (
         <Routes>
+
             <Route path="/" element={
+
                 <>
                     <h1 className="title--main">Nutshell</h1>
                     <div>Your one-stop-shop to get all stuff.</div>
@@ -28,6 +32,11 @@ export const ApplicationViews = () => {
                 <Route path="profile" element={ <Profile /> } />
                 <Route path="tasks" element={ <Tasklist /> } />
                 <Route path="tasks/create" element={ <TaskForm /> } />
+            
+                <Route path="profile" element={ <Profile /> } />
+                <Route path="Messages" element={ <MessageList /> } />
+                <Route path="Messages/:messageId/edit" element={ <MessageEdit /> } />
+                <Route path="Message/create" element={ <MessageForm /> } />
                 <Route path="image/create" element={ <ImageForm /> } />
                 <Route path="images" element={ <Images /> } />
                <Route path="image/edit/:imageId" element={ <ImageEdit /> } />

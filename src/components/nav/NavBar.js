@@ -23,7 +23,7 @@ export const NavBar = () => {
           <Link className="nav-link" to="/articles">Articles</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/chats">Chats</Link>
+          <Link className="nav-link" to="/messages">Chats</Link>
         </li>
 
         <li className="navbar__item navbar__logout">

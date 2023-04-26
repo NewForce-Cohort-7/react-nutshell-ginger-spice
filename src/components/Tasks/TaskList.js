@@ -14,14 +14,18 @@ import { FetchListOfTasks } from "../APIManager/TasksManager"
 export const Tasklist = () => {
     const [tasks, setTasks] = useState([])
     const [filteredTasks, setFiltered] = useState([])
+    const [isChecked, setIsChecked] = useState(false)
+
     const [ticketObject, setTicketObject] = useState({
         completed: false
     }
         )
 
-const handleCheckedTask = () => {
-    
-}
+        const handleCheckboxChange = (event) => {
+            setIsChecked(event.target.checked);
+          };
+
+
 
 
 //     const handleCompletedTask = (event) => {
@@ -84,7 +88,7 @@ useEffect(
         <button onClick={() => navigate("/tasks/create")}>Create Task</button>
         {
             filteredTasks.map((task) => {
-                return < Tasks key={task.id} task={task} />
+                return < Tasks key={task.id} task={task} isChecked={isChecked} handleCheckboxChange={handleCheckboxChange} />
 
             })
         }

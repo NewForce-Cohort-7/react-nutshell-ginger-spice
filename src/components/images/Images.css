@@ -1,102 +1,56 @@
-.imageForm {
-    display: none;
-  }
-  
-/* Set box-sizing to border-box to include padding and borders in element width */
-* {
-    box-sizing: border-box;
-  }
-  
-  /* Apply a responsive grid to the images container */
-  .images {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  /* Style each image container */
-  .image-container {
-    position: relative;
-  }
-  
-  /* Style the image */
-  .image {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
-  /* Style the caption and hashtags */
-  .image-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    font-size: 14px;
-    line-height: 1.2;
-  }
-  
-  /* Style the delete button */
-  .image-delete {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    padding: 5px 10px;
-    background-color: #ff6b6b;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /* Style the form */
-  .image-form {
-    margin-top: 20px;
+.images {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    align-items: center;
   }
   
-  .label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .input {
-    padding: 5px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+  .image {
+    width: 300px;
+    margin: 20px;
     border: 1px solid #ccc;
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    font-weight: bold;
-    border: none;
     border-radius: 5px;
-    cursor: pointer;
+    padding: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .button:hover {
-    background-color: #3e8e41;
+  .image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  
+  .image-thumbnail {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  .caption {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .hashtag {
+    font-style: italic;
+  }
+  
+  .hashtag span {
+    color: blue;
   }
 
-
-.images-container img {
-   
-    width: 100px;
-    height: auto;
+  .images button {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    width: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    
   }
   
   

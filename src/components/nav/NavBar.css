@@ -1,14 +1,27 @@
-.navbar {
+.nav {
     display: flex;
-    flex-wrap: nowrap;
     justify-content: left;
-}
-
-.navbar__item {
-    flex-basis: 20%;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .nav-item {
     list-style-type: none;
-}
+    position: relative;
+  }
+  
+  .nav-link {
+    display: block;
+    padding: 0.5rem;
+    text-decoration: none;
+    color: #fff;
+  }
+  
 
-.navbar__logout {
+  
+  .navbar__logout {
     margin-left: auto;
-}
+    padding: 0.5rem;
+    text-decoration: none;
+    color: #fff9f9;
+  }

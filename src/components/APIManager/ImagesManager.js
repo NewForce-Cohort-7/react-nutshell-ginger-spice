@@ -1,55 +1,39 @@
-const API_ROOT = "http://localhost:8088";
+export const newImage = (image) => {
+  return fetch('http://localhost:8088/images', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(image)
+  })
+  .then(response => response.json())
+}
 
-export const getImages = async () => {
-  try {
-    const response = await fetch(`${API_ROOT}/images`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-};
+export const getImageById = (id) => {
+  return fetch(`http://localhost:8088/images/${id}`)
+  .then(response => response.json())
+}
 
-export const saveImage = async (imageData) => {
-  try {
-    const response = await fetch(`${API_ROOT}/images`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(imageData),
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const updateImage = async (imageId, imageData) => {
-  try {
-    const response = await fetch(`${API_ROOT}/images/${imageId}`, {
+export const editImage = (imageId, updatedImage) => {
+  return fetch(`http://localhost:8088/images/${imageId}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
+          "Content-Type": "application/json"
       },
-      body: JSON.stringify(imageData),
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-};
+      body: JSON.stringify(updatedImage) 
+  })
+  .then(response => response.json())
+}
 
-export const deleteImage = async (imageId) => {
-  try {
-    const response = await fetch(`${API_ROOT}/images/${imageId}`, {
-      method: "DELETE",
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-};
+
+export const getImages = () => {
+  return fetch('http://localhost:8088/images')
+  .then(response => response.json())
+}
+
+export const deleteImage = (id) => {
+  return fetch(`http://localhost:8088/images/${id}`, {
+    method: "DELETE",
+  })
+  .then(response => response.json())
+}

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { PostNewTask } from "../APIManager/TasksManager"
 
 
 export const TaskForm = () => {
@@ -23,18 +24,10 @@ export const TaskForm = () => {
         userId: nutshellUserObject.id,
         name: task.name,
         completed: false,
-        finishDate: new Date().toISOString().split('T')[0],
+        finishDate: task.finishDate
 
     }
-        return fetch(`http://localhost:8088/tasks`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(taskToSendToAPI)
-    })
-   
-            .then(response => response.json())
+        PostNewTask(taskToSendToAPI)
             .then(() => {
                 navigate("/tasks")
             })
@@ -84,21 +77,7 @@ export const TaskForm = () => {
                         />
                 </div>
             </fieldset>
-            {/* <fieldset>
-                <div className="form-group">
-                    <label htmlFor="name">Emergency:</label>
-                    <input type="checkbox"
-                        value={task.emergency}
-                        onChange={
-                            (event) => {
-                                const copy = {...task}
-                                copy.emergency = event.target.checked
-                                update(copy)
-
-                            }
-                        } />
-                </div>
-            </fieldset> */}
+            
             <button 
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">

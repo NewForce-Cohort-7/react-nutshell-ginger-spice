@@ -3,8 +3,19 @@ import { deleteMessage, editMessage } from "../APIManager/MessagesManager";
 
 export const Message = ({messageObject, getAllMessages, currentUser, users }) => {
 
-    const currentUserInfo = users.find(user => user.id === currentUser.id)
+    const currentUserInfo = users.find(user => user.id === messageObject.userId)
 
+    const editOrNoEdit = () => {
+        if(currentUser.id === messageObject.userId) {
+            return <Link to={`/Messages/${messageObject.id}/edit`}>
+                <div className="footerNote">Sent from {currentUserInfo?.fullName} at {messageObject.dateSent}</div>
+                </Link>
+        } else {
+            return <div className="footerNote">
+                Sent from {currentUserInfo?.fullName} at {messageObject.dateSent}
+                </div>
+        }
+    }
 
     const deleteButton = () => {
         return <button onClick={() => {
@@ -13,15 +24,13 @@ export const Message = ({messageObject, getAllMessages, currentUser, users }) =>
         }} className="message_delete">Delete</button>
     }
 
-    return <Link to={`/Messages/${messageObject.id}/edit`}>
-        <section className="message" >
+    return <section className="message" >
         <section>{messageObject.content}</section>
         <footer>
             <div className="footer">
-                <div className="footerNote">Sent from {currentUserInfo?.fullName} at {messageObject.dateSent}</div>
+                {editOrNoEdit()}
                 {deleteButton()}
             </div>
         </footer>
     </section>
-        </Link>
 }

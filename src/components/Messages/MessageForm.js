@@ -28,7 +28,7 @@ export const MessageForm = () => {
             content: message.content,
             dateSent: timeStamp
         }
-
+       
         //Performing fetch to post new object to api
         return createMessage(messageToSendToAPI)
             .then(() => {

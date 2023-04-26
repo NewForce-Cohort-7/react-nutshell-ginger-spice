@@ -27,9 +27,9 @@ export const ApplicationViews = () => {
             }>
             
                 <Route path="profile" element={ <Profile /> } />
-                <Route path="Messages" element={ <MessageList /> } />
-                <Route path="Messages/:messageId/edit" element={ <MessageEdit /> } />
-                <Route path="Message/create" element={ <MessageForm /> } />
+                <Route path="messages" element={ <MessageList /> } />
+                <Route path="messages/:messageId/edit" element={ <MessageEdit /> } />
+                <Route path="message/create" element={ <MessageForm /> } />
                 <Route path="image/create" element={ <ImageForm /> } />
                 <Route path="images" element={ <Images /> } />
                <Route path="image/edit/:imageId" element={ <ImageEdit /> } />

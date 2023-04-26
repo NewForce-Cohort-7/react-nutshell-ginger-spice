@@ -1,5 +1,9 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import { Profile } from "../profile/Profile"
+import { Tasklist } from "../Tasks/TaskList"
+import { TaskForm } from "../Tasks/TaskForm"
+
+
 import { MessageList } from "../Messages/MessageList"
 import { MessageEdit } from "../Messages/MessageEdit"
 import { MessageForm } from "../Messages/MessageForm"
@@ -25,6 +29,9 @@ export const ApplicationViews = () => {
                     <Outlet />
                 </>
             }>
+                <Route path="profile" element={ <Profile /> } />
+                <Route path="tasks" element={ <Tasklist /> } />
+                <Route path="tasks/create" element={ <TaskForm /> } />
             
                 <Route path="profile" element={ <Profile /> } />
                 <Route path="messages" element={ <MessageList /> } />

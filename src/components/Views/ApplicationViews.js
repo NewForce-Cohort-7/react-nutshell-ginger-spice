@@ -1,10 +1,10 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 
 
-import { ImageForm } from "../images/ImageForm"
+import { ImageForm } from "../Images/ImageForm"
 
-import { Images } from "../images/Image"
-import { ImageEdit } from "../images/ImageEdit"
+import { Images } from "../Images/Image"
+import { ImageEdit } from "../Images/ImageEdit"
 
 
 export const ApplicationViews = () => {

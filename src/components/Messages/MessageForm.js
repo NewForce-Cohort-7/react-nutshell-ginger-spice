@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createMessage } from "../APIManager/MessagesManager";
 
-export const MessageForm = () => {
+export const MessageForm = ({updateStateMessages}) => {
 
     const [message, updateMessage] = useState({
         content: ""
@@ -24,17 +24,21 @@ export const MessageForm = () => {
         //Creating object to be saved to api
         const messageToSendToAPI = {
             userId: nutshellUserObject.id,
-            userName: nutshellUserObject.fullName,
+            userName: nutshellUserObject.userName,
             content: message.content,
             dateSent: timeStamp
         }
        
         //Performing fetch to post new object to api
         return createMessage(messageToSendToAPI)
-            .then(() => {
-                navigate("/messages")
-            })
-    }
+            .then(returnedMessages => updateStateMessages(returnedMessages))
+            .then(()=> updateMessage({ 
+            userName: "",
+            content: "",
+            dateSent: ""
+            }))
+        }
+    
     //Creating message form that will be displayed
     return (
         <form className="messageForm">

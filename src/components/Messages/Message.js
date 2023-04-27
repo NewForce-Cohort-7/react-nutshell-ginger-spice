@@ -17,19 +17,24 @@ export const Message = ({messageObject, getAllMessages, currentUser, users }) =>
         }
     }
 
-    const deleteButton = () => {
-        return <button onClick={() => {
-            deleteMessage(messageObject.id)
-                .then(getAllMessages)
-        }} className="message_delete">Delete</button>
+    const deleteOrNoDelete = () => {
+        if(currentUser.id === messageObject.userId) {
+            return <button onClick={() => {
+                deleteMessage(messageObject.id)
+                    .then(getAllMessages)
+            }} className="message_delete">Delete</button>
+        } else {
+            return ""
+        }
     }
+        
 
     return <section className="message" >
         <section>{messageObject.content}</section>
         <footer>
             <div className="footer">
                 {editOrNoEdit()}
-                {deleteButton()}
+                {deleteOrNoDelete()}
             </div>
         </footer>
     </section>

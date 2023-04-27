@@ -7,6 +7,7 @@ import { TaskForm } from "../Tasks/TaskForm"
 import { MessageList } from "../Messages/MessageList"
 import { MessageEdit } from "../Messages/MessageEdit"
 import { MessageForm } from "../Messages/MessageForm"
+import { MessageContainer } from "../Messages/MessageContainer"
 import { ImageForm } from "../Images/ImageForm"
 import { Images } from "../Images/Image"
 import { ImageEdit } from "../Images/ImageEdit"
@@ -34,9 +35,8 @@ export const ApplicationViews = () => {
                 <Route path="tasks/create" element={ <TaskForm /> } />
             
                 <Route path="profile" element={ <Profile /> } />
-                <Route path="messages" element={ <MessageList /> } />
+                <Route path="messages" element={ <MessageContainer />} />
                 <Route path="messages/:messageId/edit" element={ <MessageEdit /> } />
-                <Route path="message/create" element={ <MessageForm /> } />
                 <Route path="image/create" element={ <ImageForm /> } />
                 <Route path="images" element={ <Images /> } />
                <Route path="image/edit/:imageId" element={ <ImageEdit /> } />

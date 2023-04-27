@@ -5,10 +5,12 @@ import { ImageForm } from "../images/ImageForm"
 
 import { Images } from "../images/Image"
 import { ImageEdit } from "../images/ImageEdit"
-import { Profile } from "../profile/Profile"
 import { MessageList } from "../Messages/MessageList"
 import { MessageEdit } from "../Messages/MessageEdit"
 import { MessageForm } from "../Messages/MessageForm"
+import { Profile } from "../Profile/Profile"
+import { FriendsList } from "../friends/Friends"
+
 
 
 
@@ -30,7 +32,7 @@ export const ApplicationViews = () => {
                     <Outlet />
                 </>
             }>
-            
+                <Route path="friends" element={ <FriendsList /> } />
                 <Route path="profile" element={ <Profile /> } />
                 <Route path="Messages" element={ <MessageList /> } />
                 <Route path="Messages/:messageId/edit" element={ <MessageEdit /> } />

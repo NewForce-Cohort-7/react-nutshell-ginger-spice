@@ -31,3 +31,13 @@ export const getMessageById = (id) => {
     return fetch(`http://localhost:8088/messages/${id}`)
     .then(response => response.json())
 }
+
+export const getAllUsers = () => {
+    return fetch('http://localhost:8088/users')
+    .then(response => response.json())
+}
+
+export const fetchAllMessages = () => {
+    return fetch('http://localhost:8088/messages')
+    .then(response => response.json())
+}

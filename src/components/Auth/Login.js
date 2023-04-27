@@ -16,7 +16,8 @@ export const Login = () => {
                 if (foundUsers.length === 1) {
                     const user = foundUsers[0]
                     localStorage.setItem("nutshell_user", JSON.stringify({
-                        id: user.id
+                        id: user.id,
+                        userName: user.fullName
                     }))
 
                     navigate("/")

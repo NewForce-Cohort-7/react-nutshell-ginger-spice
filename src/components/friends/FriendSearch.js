@@ -54,29 +54,29 @@ export const FriendSearch = () => {
         .then(window.location.reload())
     }
 
-    return <>
-
-        <div className="search--field">
-            <label htmlFor="search--input"><h2>User Search</h2></label>
-            <input className="search--input"
-                    type="text" 
-                    placeholder="Enter username" 
-                    onChange={event => {
-                        setSearchTerms(event.target.value)
-                    }} 
+    return (
+        <>
+          <div className="bg-gray-100 py-8">
+            <label htmlFor="search--input" className="text-2xl font-semibold mb-4 block">User Search</label>
+            <input
+              className="border-gray-300 rounded-lg py-2 px-4 w-full mb-4"
+              type="text"
+              placeholder="Enter username"
+              onChange={(event) => {
+                setSearchTerms(event.target.value);
+              }}
             />
-        </div>
-
-        <div className="search--userlist">
-        <p className="search--instruct">Click a username to add them as a friend</p>
-            {filteredUsers.map(user => {
-                return <>
-                        <div>
-                        <Link className="user" id={`user--${user.id}`} onClick={(event) => {handleAddFriend(event)}} key={`user--${user.id}`}>{user.username}</Link>
-                        </div>
-                        </>
-            })}
-        </div>
-
-    </>
-}
+            <p className="text-lg font-medium mb-2">Click a username to add them as a friend</p>
+            <div className="space-y-2">
+              {filteredUsers.map((user) => (
+                <div key={`user--${user.id}`}>
+                  <Link className="block text-lg font-medium text-blue-500 hover:underline" id={`user--${user.id}`} onClick={handleAddFriend}>
+                    {user.username}
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      );
+    }

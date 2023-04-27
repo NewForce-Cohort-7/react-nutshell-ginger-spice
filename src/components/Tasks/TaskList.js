@@ -13,17 +13,6 @@ export const TaskList = ({tacos, updateTasks}) => {
     const localNutshellUser = localStorage.getItem("nutshell_user")
     const nutshellUserObject = JSON.parse(localNutshellUser)
 
-
-// useEffect(
-//    () => {
-//     GetListOfTasks()
-//     .then((tasksArray) => {
-//         setTasks(tasksArray)
-//     })},
-// []
-// )
-
-
 //Filters the tasks and displays the ones for that user
 useEffect(
     () => {

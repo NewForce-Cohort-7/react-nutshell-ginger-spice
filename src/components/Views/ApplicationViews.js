@@ -1,6 +1,5 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import { Profile } from "../profile/Profile"
-import { Tasklist } from "../Tasks/TaskList"
 import { TaskForm } from "../Tasks/TaskForm"
 
 
@@ -10,6 +9,8 @@ import { MessageForm } from "../Messages/MessageForm"
 import { ImageForm } from "../Images/ImageForm"
 import { Images } from "../Images/Image"
 import { ImageEdit } from "../Images/ImageEdit"
+import { TaskEdit } from "../Tasks/TaskEdit"
+import { TaskContainer } from "../Tasks/TaskContainer"
 
 
 export const ApplicationViews = () => {
@@ -30,9 +31,9 @@ export const ApplicationViews = () => {
                 </>
             }>
                 <Route path="profile" element={ <Profile /> } />
-                <Route path="tasks" element={ <Tasklist /> } />
+                <Route path="tasks" element={ <TaskContainer /> } />
                 <Route path="tasks/create" element={ <TaskForm /> } />
-            
+                <Route path="tasks/edit/:tasksId" element={ <TaskEdit /> } />
                 <Route path="profile" element={ <Profile /> } />
                 <Route path="Messages" element={ <MessageList /> } />
                 <Route path="Messages/:messageId/edit" element={ <MessageEdit /> } />

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { PostNewTask } from "../APIManager/TasksManager"
 
 
-export const TaskForm = () => {
+export const TaskForm = ({updateTasks}) => {
 
     const [task, update] = useState({
         name: "",
@@ -27,7 +27,16 @@ export const TaskForm = () => {
         finishDate: task.finishDate
 
     }
-        PostNewTask(taskToSendToAPI)
+        // PostNewTask(taskToSendToAPI)
+        fetch(`http://localhost:8088/tasks`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(taskToSendToAPI)
+    })
+   
+            .then(response => response.json())
             .then(() => {
                 navigate("/tasks")
             })
@@ -60,9 +69,9 @@ export const TaskForm = () => {
             
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="startDate">start date: </label>
+                    <label htmlFor="finish-date">Complete by: </label>
                     <input
-                    name="startDate"
+                    name="finish-date"
                         required autoFocus
                         type="date"
                         className="form-control"
@@ -81,7 +90,7 @@ export const TaskForm = () => {
             <button 
                 onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">
-                Submit Ticket
+                Submit Task
             </button>
 
         </form>

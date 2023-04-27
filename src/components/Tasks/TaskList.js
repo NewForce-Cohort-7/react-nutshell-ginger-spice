@@ -3,9 +3,10 @@ import { Tasks } from "./Tasks"
 import { useNavigate } from "react-router-dom"
 import { GetListOfTasks } from "../APIManager/TasksManager"
 
-export const Tasklist = () => {
-    const [tasks, setTasks] = useState([])
+export const TaskList = ({tacos, updateTasks}) => {
+    // const [tasks, setTasks] = useState([])
     const [filteredTasks, setFiltered] = useState([])
+
 
     const navigate = useNavigate()
 
@@ -13,23 +14,23 @@ export const Tasklist = () => {
     const nutshellUserObject = JSON.parse(localNutshellUser)
 
 
-useEffect(
-   () => {
-    GetListOfTasks()
-    .then((tasksArray) => {
-        setTasks(tasksArray)
-    })},
-[]
-)
+// useEffect(
+//    () => {
+//     GetListOfTasks()
+//     .then((tasksArray) => {
+//         setTasks(tasksArray)
+//     })},
+// []
+// )
 
 
 //Filters the tasks and displays the ones for that user
 useEffect(
     () => {
-        const personalTasks = tasks.filter(task => task.userId === nutshellUserObject.id && task.completed === false)
+        const personalTasks = tacos.filter(task => task.userId === nutshellUserObject.id && task.completed === false)
             setFiltered(personalTasks)
     },
-    [tasks]
+    [tacos]
 )
 
     return(
@@ -38,7 +39,7 @@ useEffect(
         <button onClick={() => navigate("/tasks/create")}>Create Task</button>
         {
             filteredTasks.map((task) => {
-                return < Tasks key={task.id} task={task}/>
+                return < Tasks key={task.id} task={task} updateTasks={updateTasks}/>
 
             })
         }

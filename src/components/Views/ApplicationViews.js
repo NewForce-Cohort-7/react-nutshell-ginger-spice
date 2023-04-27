@@ -1,18 +1,16 @@
 import { Outlet, Route, Routes } from "react-router-dom"
+import { Profile } from "../profile/Profile"
+import { Tasklist } from "../Tasks/TaskList"
+import { TaskForm } from "../Tasks/TaskForm"
 
 
-import { ImageForm } from "../images/ImageForm"
-
-import { Images } from "../images/Image"
-import { ImageEdit } from "../images/ImageEdit"
 import { MessageList } from "../Messages/MessageList"
 import { MessageEdit } from "../Messages/MessageEdit"
 import { MessageForm } from "../Messages/MessageForm"
-import { Profile } from "../Profile/Profile"
-import { FriendsList } from "../friends/Friends"
-
-
-
+import { MessageContainer } from "../Messages/MessageContainer"
+import { ImageForm } from "../Images/ImageForm"
+import { Images } from "../Images/Image"
+import { ImageEdit } from "../images/ImageEdit"
 
 
 export const ApplicationViews = () => {
@@ -32,11 +30,13 @@ export const ApplicationViews = () => {
                     <Outlet />
                 </>
             }>
-                <Route path="friends" element={ <FriendsList /> } />
                 <Route path="profile" element={ <Profile /> } />
-                <Route path="Messages" element={ <MessageList /> } />
-                <Route path="Messages/:messageId/edit" element={ <MessageEdit /> } />
-                <Route path="Message/create" element={ <MessageForm /> } />
+                <Route path="tasks" element={ <Tasklist /> } />
+                <Route path="tasks/create" element={ <TaskForm /> } />
+            
+                <Route path="profile" element={ <Profile /> } />
+                <Route path="messages" element={ <MessageContainer />} />
+                <Route path="messages/:messageId/edit" element={ <MessageEdit /> } />
                 <Route path="image/create" element={ <ImageForm /> } />
                 <Route path="images" element={ <Images /> } />
                <Route path="image/edit/:imageId" element={ <ImageEdit /> } />

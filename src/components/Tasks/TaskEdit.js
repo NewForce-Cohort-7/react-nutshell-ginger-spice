@@ -53,7 +53,7 @@ export const TaskEdit = () => {
     }
 
     return (
-        <form className="ticketForm"
+        <form className="taskForm"
         onSubmit={handleSaveButtonClick}>
             <fieldset>
                 <div className="form-group">

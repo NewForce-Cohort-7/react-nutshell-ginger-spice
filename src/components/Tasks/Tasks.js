@@ -35,12 +35,12 @@ export const Tasks = ( {task, updateTasks} ) => {
             },
             body: JSON.stringify(thingToSendToAPI)
         })
+            .then(() => fetch(`http://localhost:8088/tasks`))
             .then(response => response.json())
-            .then(() => {
-
-
-    })
+            .then(returnedTasks => updateTasks(returnedTasks))
+            .then(()=> setShowEdit(false) )
 }
+
 
        
        return (

@@ -45,9 +45,9 @@ export const TaskForm = ({updateTasks}) => {
 
 
     return (
-        <form className="ticketForm">
+        <form className="taskForm">
 
-            <h2 className="ticketForm__title">New Task</h2>
+            <h2 className="taskForm__title">New Task</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="description">Description:</label>

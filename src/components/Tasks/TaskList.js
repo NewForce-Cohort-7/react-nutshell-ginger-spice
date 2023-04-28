@@ -4,36 +4,59 @@ import { useNavigate } from "react-router-dom"
 import { GetListOfTasks } from "../APIManager/TasksManager"
 
 export const TaskList = ({tacos, updateTasks}) => {
-    // const [tasks, setTasks] = useState([])
-    const [filteredTasks, setFiltered] = useState([])
+  const [filteredIncompleteTasks, setFilteredIncompleteTasks] = useState([])
+  const [filteredCompleteTasks, setFilteredCompleteTasks] = useState([])
 
+  const navigate = useNavigate()
 
-    const navigate = useNavigate()
+  const localNutshellUser = localStorage.getItem("nutshell_user")
+  const nutshellUserObject = JSON.parse(localNutshellUser)
 
-    const localNutshellUser = localStorage.getItem("nutshell_user")
-    const nutshellUserObject = JSON.parse(localNutshellUser)
+  useEffect(() => {
+    const personalIncompleteTasks = tacos.filter(task => task.userId === nutshellUserObject.id && task.completed === false)
+    setFilteredIncompleteTasks(personalIncompleteTasks)
 
-//Filters the tasks and displays the ones for that user
-useEffect(
-    () => {
-        const personalTasks = tacos.filter(task => task.userId === nutshellUserObject.id && task.completed === false)
-            setFiltered(personalTasks)
-    },
-    [tacos]
-)
+    const personalCompleteTasks = tacos.filter(task => task.userId === nutshellUserObject.id && task.completed === true)
+    setFilteredCompleteTasks(personalCompleteTasks)
+  }, [tacos])
 
-    return(
-    <article className="task-list">
-        <h2>To Do List</h2>
-        <button onClick={() => navigate("/tasks/create")}>Create Task</button>
-        {
-            filteredTasks.map((task) => {
-                return < Tasks key={task.id} task={task} updateTasks={updateTasks}/>
+//   const deleteButton = () => {
+//         return <button onClick={() => 
 
-            })
-        }
-           
-    </article>
-    )
+//                 fetch(`http://localhost:8088/tasks/${tacos.id}`, {
+//                 method: "DELETE"
+//             })
+//             .then(() => {
+//                 fetch(`http://localhost:8088/tasks`)
+//             })
+//         } className="ticket__delete">Delete</button>
     
+
+// }
+
+
+  return (
+    <>
+      <article className="task-list">
+        <div className="incomplete-tasks">
+          <h2>To Do List</h2>
+          <button onClick={() => navigate("/tasks/create")}>Create Task</button>
+          {filteredIncompleteTasks.map((task) => (
+            <Tasks key={task.id} task={task} updateTasks={updateTasks} />
+          ))}
+        </div>
+        <div className="complete-tasks">
+          <h2>Completed Tasks</h2>
+          {filteredCompleteTasks.map((task) => (
+            <Tasks key={task.id} task={task} updateTasks={updateTasks} /> 
+          ))}
+          {/* <footer>
+          {
+                        deleteButton()
+                    }
+          </footer> */}
+        </div>
+      </article>
+    </>
+  )
 }

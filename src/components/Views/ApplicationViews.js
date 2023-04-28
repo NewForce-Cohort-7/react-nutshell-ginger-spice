@@ -1,5 +1,5 @@
 import { Outlet, Route, Routes } from "react-router-dom"
-import { Profile } from "../Profile/Profile"
+import { Profile } from "../profile/Profile"
 import { TaskForm } from "../Tasks/TaskForm"
 import { MessageList } from "../Messages/MessageList"
 import { MessageEdit } from "../Messages/MessageEdit"
@@ -9,6 +9,8 @@ import { ImageForm } from "../Images/ImageForm"
 import { Images } from "../Images/Image"
 import { ImageEdit } from "../Images/ImageEdit"
 import { FriendsList } from "../friends/Friends"
+import {TaskContainer} from "../Tasks/TaskContainer"
+import {TaskEdit} from "../Tasks/TaskEdit"
 
 
 export const ApplicationViews = () => {

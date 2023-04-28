@@ -25,6 +25,9 @@ export const NavBar = () => {
         <li className="nav-item">
           <Link className="nav-link" to="/messages">Chats</Link>
         </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/friends">Friends</Link>
+        </li>
 
         <li className="navbar__item navbar__logout">
                 <Link className="navbar__link" to="" onClick={() => {

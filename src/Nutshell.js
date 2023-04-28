@@ -1,10 +1,11 @@
 import { Login } from './components/Auth/Login';
 import { Register } from './components/Auth/Register';
 import { Authorized } from './components/Views/Authorized';
-import ApplicationViews from './components/Views/ApplicationViews';
+import { ApplicationViews } from './components/Views/ApplicationViews';
 import { Route, Routes } from "react-router-dom"
 import './Nutshell.css';
 import { NavBar } from './components/nav/NavBar';
+
 
 function Nutshell() {
   return <Routes>

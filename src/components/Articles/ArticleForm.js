@@ -1,19 +1,20 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { addArticle, updateArticle } from "../../components/APIManager/ArticlesManager";
+
+import { addArticle } from "../../components/APIManager/ArticlesManager";
 
 
 
 export const ArticleForm = ({isAuthenticated}) => {
 
-     const [article, setArticle] = useState({
-       title: "",
-       timestamp: new Date().toISOString(),
-       synopsis: "",
-       url: "",
-       userId: JSON.parse(sessionStorage.getItem("nutshell_user")).id,
-     })
-
+  const [article, setArticle] = useState({
+    title: "",
+    timestamp: new Date().toISOString(),
+    synopsis: "",
+    url: "",
+    userId: JSON.parse(sessionStorage.getItem("nutshell_user"))?.id,
+  });
+  
      const navigate = useNavigate()
 
      const handleControlledInputChange = (event) => {
@@ -26,9 +27,15 @@ export const ArticleForm = ({isAuthenticated}) => {
      }
 
      const handleClickSaveArticle = (event) => {
-       event.preventDefault()
-
-       addArticle(article).then(() => navigate("/articles"))
+      event.preventDefault();
+    
+      addArticle(article)
+        .then(savedArticle => {
+          console.log("Saved article:", savedArticle);
+          navigate("/articles");
+        });
+    
+    
      }
 
      return (

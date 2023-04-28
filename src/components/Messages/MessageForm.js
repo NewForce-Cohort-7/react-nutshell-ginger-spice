@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createMessage } from "../APIManager/MessagesManager";
+import { Dropdown } from "./PrivateMessageDropdown"
+import"./Messages.css"
 
 export const MessageForm = ({updateStateMessages}) => {
 
@@ -9,6 +11,12 @@ export const MessageForm = ({updateStateMessages}) => {
     })
 
     const navigate = useNavigate()
+    const [showforumform, setforumshow] = useState(false)
+    const [showprivateform, setprivateshow] = useState(false)
+
+    function eraseText() {
+        document.getElementById("output").value = "";
+    }
 
     const localNutshellUser = localStorage.getItem("nutshell_user")
     const nutshellUserObject = JSON.parse(localNutshellUser)
@@ -26,6 +34,7 @@ export const MessageForm = ({updateStateMessages}) => {
             userId: nutshellUserObject.id,
             userName: nutshellUserObject.userName,
             content: message.content,
+            recipient: message.recipient,
             dateSent: timeStamp
         }
        
@@ -35,14 +44,27 @@ export const MessageForm = ({updateStateMessages}) => {
             .then(()=> updateMessage({ 
             userName: "",
             content: "",
+            recipient: "",
             dateSent: ""
             }))
         }
+
     
     //Creating message form that will be displayed
-    return (
-        <form className="messageForm">
-            <h2 className="messageForm__title">New Message</h2>
+    return <>{
+
+        
+        <button className="new-forum-message" onClick={() => setforumshow(true)}>New Forum Message</button>
+    }
+    {
+
+        
+        <button className="new-private-message" onClick={() => setprivateshow(true)}>New Private Message</button>
+    }
+    {
+        showforumform?
+        <form className="messageForm" id="forumform">
+            <h2 className="messageForm__title">New Forum Message</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="content">Message:</label>
@@ -63,27 +85,71 @@ export const MessageForm = ({updateStateMessages}) => {
                         }></textarea>
                 </div>
             </fieldset>
-            {/* will be used for private messaging later
-
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="name">Recipient:</label>
-                    <input type="text"
-                        value={message.recipient}
-                        onChange={
-                            (event) => {
-                                const copy = {...message}
-                                copy.recipient = event.target.checked
-                                updateMessage(copy)
-                            }
-                        } />
-                </div>
-            </fieldset> */}
             <button 
-            onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+            onClick={(clickEvent) => {
+                handleSaveButtonClick(clickEvent);
+                setforumshow(false);
+            }}
             className="btn btn-primary">
-                Send Message
+                Send Forum Message
+            </button>
+            <button 
+            onClick={() => {
+                setforumshow(false);
+                updateMessage("")
+            }}
+            className="btn btn-primary">
+                Cancel
             </button>
         </form>
-    )
-}
+        :null
+        
+    }
+    {
+        showprivateform?
+        <form className="messageForm">
+        <h2 className="messageForm__title">New Private Message</h2>
+                    <fieldset>
+                        <div className="form-group">
+                            <label htmlFor="name">Recipient:</label>
+                            <Dropdown placeHolder={"Select Recipient"}/>
+                        </div>
+                    </fieldset> 
+        <fieldset>
+            <div className="form-group">
+                <label htmlFor="content">Message:</label>
+                <textarea
+                    required autoFocus
+                    type="text"
+                    style={{
+                        height: "10rem"
+                    }}
+                    className="form-control"
+                    value={message.content}
+                    onChange={
+                        (event) => {
+                            const copy = {...message}
+                            copy.content = event.target.value
+                            updateMessage(copy)
+                        }
+                    }></textarea>
+            </div>
+        </fieldset>
+        <button 
+        onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+        className="btn btn-primary">
+            Send Private Message
+        </button>
+        <button 
+            onClick={() => {
+                setprivateshow(false);
+                updateMessage("")
+            }}
+            className="btn btn-primary">
+                Cancel
+            </button>
+    </form>
+    :null
+    }
+
+        </>}

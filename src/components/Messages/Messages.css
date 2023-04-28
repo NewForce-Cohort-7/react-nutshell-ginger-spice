@@ -42,3 +42,19 @@ header {
     font-style: italic;
     margin-top: auto;
 }
+
+input {
+    border: 1px solid black;
+    margin-left: 1%;
+    border-radius: 0.3em;
+}
+
+form {
+    margin-bottom: 2%;
+}
+
+button {
+    border: 1px solid black;
+    border-radius: 0.3em;
+    padding: 0.2em;
+}

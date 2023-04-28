@@ -1,14 +1,12 @@
 import { Outlet, Route, Routes } from "react-router-dom"
-import { Profile } from "../Profile/Profile"
+import { Profile } from "../profile/Profile"
 import { Tasklist } from "../Tasks/TaskList"
 import { TaskForm } from "../Tasks/TaskForm"
-import { MessageList } from "../Messages/MessageList"
 import { MessageEdit } from "../Messages/MessageEdit"
-import { MessageForm } from "../Messages/MessageForm"
 import { MessageContainer } from "../Messages/MessageContainer"
-import { ImageForm } from "../images/ImageForm"
-import { Images } from "../images/Image"
-import { ImageEdit } from "../images/ImageEdit"
+import { ImageForm } from "../Images/ImageForm"
+import { Images } from "../Images/Image"
+import { ImageEdit } from "../Images/ImageEdit"
 import { FriendsList } from "../friends/Friends"
 
 
@@ -33,7 +31,6 @@ export const ApplicationViews = () => {
                 <Route path="tasks" element={ <Tasklist /> } />
                 <Route path="tasks/create" element={ <TaskForm /> } />
                 <Route path="friends" element={ <FriendsList /> } />
-                <Route path="profile" element={ <Profile /> } />
                 <Route path="messages" element={ <MessageContainer />} />
                 <Route path="messages/:messageId/edit" element={ <MessageEdit /> } />
                 <Route path="image/create" element={ <ImageForm /> } />

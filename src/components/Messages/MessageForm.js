@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createMessage } from "../APIManager/MessagesManager";
 import { Dropdown } from "./PrivateMessageDropdown"
+import { getUserFriends } from "../APIManager/FriendsManager"
+
 import"./Messages.css"
 
 export const MessageForm = ({updateStateMessages}) => {
@@ -13,10 +15,16 @@ export const MessageForm = ({updateStateMessages}) => {
     const navigate = useNavigate()
     const [showforumform, setforumshow] = useState(false)
     const [showprivateform, setprivateshow] = useState(false)
+    const [userFriends, setUserFriends] = useState([])
 
-    function eraseText() {
-        document.getElementById("output").value = "";
-    }
+    useEffect(() => {
+        getUserFriends()
+            .then((array) => {
+                setUserFriends(array)
+            })
+        }, []
+    )
+    
 
     const localNutshellUser = localStorage.getItem("nutshell_user")
     const nutshellUserObject = JSON.parse(localNutshellUser)
@@ -112,7 +120,7 @@ export const MessageForm = ({updateStateMessages}) => {
                     <fieldset>
                         <div className="form-group">
                             <label htmlFor="name">Recipient:</label>
-                            <Dropdown placeHolder={"Select Recipient"}/>
+                            <Dropdown placeHolder={"Select Recipient"} options={userFriends}/>
                         </div>
                     </fieldset> 
         <fieldset>

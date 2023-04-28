@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 import "./Dropdown.css";
 
 const Icon = () => {
@@ -10,13 +11,30 @@ const Icon = () => {
 };
 
 export const Dropdown = ({ placeHolder, options }) => {
+
+    const [showMenu, setShowMenu] = useState(false)
+
+    useEffect(() => {
+        const handler = () => setShowMenu(false);
+
+        window.addEventListener("click", handler);
+        return () => {
+            window.removeEventListener("click", handler);
+        };
+    });
+
+    const handleInputClick = (e) => {
+        e.stopPropagation();
+        setShowMenu(!showMenu);
+    };
+
   const getDisplay = () => {
     return placeHolder;
   };
 
   return (
     <div className="dropdown-container">
-      <div className="dropdown-input">
+      <div onClick={handleInputClick} className="dropdown-input">
         <div className="dropdown-selected-value">{getDisplay()}</div>
         <div className="dropdown-tools">
           <div className="dropdown-tool">
@@ -24,6 +42,15 @@ export const Dropdown = ({ placeHolder, options }) => {
           </div>
         </div>
       </div>
+      {showMenu && (
+
+          <div className="dropdown-menu">
+        {options.map((option) => 
+        <div key={option.id} className="dropdown-item">
+            {option.username}
+        </div>)}
+      </div>
+        )}
     </div>
   );
 };

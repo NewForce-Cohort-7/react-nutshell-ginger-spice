@@ -6,12 +6,13 @@ import { getUserFriends } from "../APIManager/FriendsManager"
 
 import"./Messages.css"
 
-export const MessageForm = ({updateStateMessages}) => {
+export const MessageForm = ({updateStateMessages, selectedValue}) => {
 
     const [message, updateMessage] = useState({
-        content: ""
+        content: "",
+        recipient: ""
     })
-
+    
     const navigate = useNavigate()
     const [showforumform, setforumshow] = useState(false)
     const [showprivateform, setprivateshow] = useState(false)
@@ -62,12 +63,12 @@ export const MessageForm = ({updateStateMessages}) => {
     return <>{
 
         
-        <button className="new-forum-message" onClick={() => setforumshow(true)}>New Forum Message</button>
+        <button className="new-forum-message" onClick={() => {setforumshow(true); setprivateshow(false);}}>New Forum Message</button>
     }
     {
 
         
-        <button className="new-private-message" onClick={() => setprivateshow(true)}>New Private Message</button>
+        <button className="new-private-message" onClick={() => {setprivateshow(true); setforumshow(false);}}>New Private Message</button>
     }
     {
         showforumform?
@@ -120,7 +121,7 @@ export const MessageForm = ({updateStateMessages}) => {
                     <fieldset>
                         <div className="form-group">
                             <label htmlFor="name">Recipient:</label>
-                            <Dropdown placeHolder={"Select Recipient"} options={userFriends}/>
+                            <Dropdown placeHolder={"Select Recipient"} value={message.recipient} options={userFriends}/>
                         </div>
                     </fieldset> 
         <fieldset>
@@ -144,7 +145,7 @@ export const MessageForm = ({updateStateMessages}) => {
             </div>
         </fieldset>
         <button 
-        onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
+        onClick={(clickEvent) => {handleSaveButtonClick(clickEvent); setprivateshow(false);}}
         className="btn btn-primary">
             Send Private Message
         </button>

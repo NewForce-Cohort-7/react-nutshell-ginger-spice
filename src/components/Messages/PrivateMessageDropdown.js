@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import "./Dropdown.css";
+
 
 const Icon = () => {
   return (
@@ -12,6 +12,7 @@ const Icon = () => {
 
 export const Dropdown = ({ placeHolder, options }) => {
 
+    const [selectedValue, setSelectedValue] = useState(null);
     const [showMenu, setShowMenu] = useState(false)
 
     useEffect(() => {
@@ -29,28 +30,44 @@ export const Dropdown = ({ placeHolder, options }) => {
     };
 
   const getDisplay = () => {
+    if (selectedValue) {
+        return selectedValue.fullName
+    }
     return placeHolder;
   };
+  const onItemClick = (option) => {
+    setSelectedValue(option);
+  };
 
-  return (
-    <div className="dropdown-container">
-      <div onClick={handleInputClick} className="dropdown-input">
+  const isSelected = (option) => {
+    if (!selectedValue) {
+        return false;
+    }
+
+    return selectedValue.id === option.id
+  }
+
+  return <>
+    {
+        <div className="dropdown-container">
+        <div onClick={handleInputClick} className="dropdown-input">
         <div className="dropdown-selected-value">{getDisplay()}</div>
         <div className="dropdown-tools">
-          <div className="dropdown-tool">
-            <Icon />
-          </div>
+        <div className="dropdown-tool">
+        <Icon />
         </div>
-      </div>
-      {showMenu && (
-
-          <div className="dropdown-menu">
-        {options.map((option) => 
-        <div key={option.id} className="dropdown-item">
-            {option.username}
-        </div>)}
-      </div>
-        )}
-    </div>
-  );
-};
+        </div>
+        </div>
+        {showMenu && (
+            <div className="dropdown-menu">
+          {options.map((option) => 
+                <div onClick={() => onItemClick(option)} key={option.id} className={`dropdown-item ${isSelected(option) && "selected"}`}>
+            {option.fullName}
+            </div>
+            )}
+            </div>
+            )}
+            </div>
+        }
+        </>
+    };

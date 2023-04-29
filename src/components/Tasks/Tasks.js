@@ -1,17 +1,21 @@
 import { useState } from "react"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { InlineEdit } from "./TaskInlineEdit"
 
 
-export const Tasks = ( {task} ) => {
+export const Tasks = ( {task, updateTasks} ) => {
 
     const [isChecked, setIsChecked] = useState(task.completed)
+    const [showEdit, setShowEdit] = useState(false)
+    const navigate = useNavigate()
 
+    //All this before the return is to change the completed status of your tasks
     useEffect(() => {
         setIsChecked(task.completed)
       }, [task.completed])
 
     const handleCheckboxChange = (event) => {
-        event.preventDefault()  
 
         const completed = !isChecked
        
@@ -31,22 +35,30 @@ export const Tasks = ( {task} ) => {
             },
             body: JSON.stringify(thingToSendToAPI)
         })
+            .then(() => fetch(`http://localhost:8088/tasks`))
             .then(response => response.json())
-            .then(() => {
-
-
-    })
+            .then(returnedTasks => updateTasks(returnedTasks))
+            .then(()=> setShowEdit(false) )
 }
 
 
        
-       return <>
-            <section>
+       return (
+        !showEdit ?         
+        <section
+        onDoubleClick={() => setShowEdit(true)}
+
+            >
                 <input type="checkbox" onChange={handleCheckboxChange} value={isChecked}  checked={isChecked}/>
                 {task.name} (complete by: {task.finishDate})
             </section>
 
-    </>  
+            :
+
+            < InlineEdit taskProp={task} updateTasks={updateTasks} setShowEdit={setShowEdit}/>
+        
+
+    )  
     
 }
     

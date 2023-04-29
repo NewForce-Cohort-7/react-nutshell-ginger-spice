@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { MessageForm } from "./MessageForm";
 import { MessageList } from "./MessageList";
 import { fetchAllMessages } from "../APIManager/MessagesManager";
+import "./Messages.css"
 
 export const MessageContainer = () => {
 
